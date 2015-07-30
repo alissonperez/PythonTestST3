@@ -20,6 +20,10 @@ class RunPythonTestCommand(sublime_plugin.TextCommand):
         # turn on language/theme for output panel somehow
         panel = self.view.window().create_output_panel('exec')
         panel.settings().set('color_scheme', self.color_scheme(settings))
+
+        command_print_msg = r'echo "Command: \"{}\""'.format(re.sub('"', '\\"', command))
+        command = command_print_msg + "; " + command
+
         self.view.window().run_command(
             "exec", {"cmd": [command],
                      "file_regex": TB_FILE,
@@ -57,21 +61,22 @@ class RunPythonTestCommand(sublime_plugin.TextCommand):
         matches = TEST_FUNC_RE.findall(tx)
         if not matches:
             return
-        print(matches)
+
         indent, funcname = matches[-1]
         if not indent:
             return funcname
+
         # find the enclosing class
         before = self.view.substr(sublime.Region(0, point))
-        print(len(before))
         classes = TEST_CASE_RE.findall(before)
-        print(classes)
+
         if not classes:
             return funcname  # this is probably bad
+
         candidates = [c for i, c in classes if len(i) < len(indent)]
-        print(candidates)
         if candidates:
             return "%s.%s" % (candidates[-1], funcname)
+
         return funcname  # also probably bad
 
     def file_to_module(self, wd, fn):

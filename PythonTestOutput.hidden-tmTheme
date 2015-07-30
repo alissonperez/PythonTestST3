@@ -25,6 +25,17 @@
     </dict>
     <dict>
       <key>name</key>
+      <string>Command</string>
+      <key>scope</key>
+      <string>test.command</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#004ACA</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>
       <string>Test</string>
       <key>scope</key>
       <string>test.pass</string>

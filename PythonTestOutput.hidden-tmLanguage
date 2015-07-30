@@ -8,6 +8,24 @@
 	<array>
 		<dict>
 			<key>begin</key>
+			<string>Command: </string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>test.command</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>command running</string>
+			<key>end</key>
+			<string>\n</string>
+			<key>match</key>
+			<string>"(.*)"</string>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>^[=-]+$</string>
 			<key>comment</key>
 			<string>error details</string>
