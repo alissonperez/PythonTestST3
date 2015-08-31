@@ -21,7 +21,7 @@ class RunPythonTestCommand(sublime_plugin.TextCommand):
         panel = self.view.window().create_output_panel('exec')
         panel.settings().set('color_scheme', self.color_scheme(settings))
 
-        command_print_msg = r'echo "Command: \"{}\""'.format(re.sub('"', '\\"', command))
+        command_print_msg = 'python -c "print(\'Command \\"{}\\"\')"'.format(re.sub('"', '\\"', command))
         command = command_print_msg + "; " + command
 
         self.view.window().run_command(
