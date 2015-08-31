@@ -17,6 +17,12 @@ class RunPythonTestCommand(sublime_plugin.TextCommand):
         settings = self.view.window().active_view().settings().get(
             "python_test", {})
         command, wdir = self.get_test_command(settings)
+
+        if command is None:
+            return
+
+        self.save_last_commnad(command, wdir)
+
         # turn on language/theme for output panel somehow
         panel = self.view.window().create_output_panel('exec')
         panel.settings().set('color_scheme', self.color_scheme(settings))
@@ -40,6 +46,11 @@ class RunPythonTestCommand(sublime_plugin.TextCommand):
         for testname in self.get_test_selections(wdir):
             command.append(testname)
         return ' '.join(command), wdir
+
+    def save_last_commnad(self, command, wdir):
+        s = sublime.load_settings("PythonTest.last-run")
+        s.set("last_test_run", (command, wdir))
+        sublime.save_settings("PythonTest.last-run")
 
     def get_test_options(self, settings):
         return settings.get('options', [])
@@ -114,3 +125,9 @@ class RunPythonTestCommand(sublime_plugin.TextCommand):
 class RunPythonProjectTests(RunPythonTestCommand):
     def get_test_selections(self, settings):
         return []
+
+
+class RunLastPythonTest(RunPythonTestCommand):
+    def get_test_command(self, settings):
+        s = sublime.load_settings("PythonTest.last-run")
+        return s.get("last_test_run")

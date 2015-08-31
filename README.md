@@ -22,6 +22,8 @@ Tests may be run individually or in groups.
 
 To run individual tests, in a python unit test module, put a caret in some tests and press <kbd>Ctrl</kbd>-<kbd>c</kbd>,<kbd>.</kbd> to run them. Every test method (or test function) containing a caret point will be run, and only those.
 
+To run last runned test, do it then by pressing <kbd>Ctrl</kbd>-<kbd>c</kbd>,<kbd>,</kbd>. *You don't really need to be on test function to use this feature.*
+
 To run all of the tests in a module, ensure the caret is outside of any test method or function and press <kbd>Ctrl</kbd>-<kbd>c</kbd>,<kbd>.</kbd>
 
 To run all of the tests in a project, press <kbd>Ctrl</kbd>-<kbd>c</kbd>,<kbd>t</kbd> while viewing any python source file.
